@@ -2,6 +2,6 @@
 {
     public class EmailOptions
     {
-        public string SendGridKey { get; set; }
+        //public string SendGridKey { get; set; }
     }
 }
