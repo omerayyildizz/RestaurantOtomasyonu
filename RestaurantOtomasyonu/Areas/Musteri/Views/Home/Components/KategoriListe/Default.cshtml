@@ -1,0 +1,18 @@
+﻿@model IEnumerable<RestaurantOtomasyonu.Models.Kategori>  
+
+<div class="wrap-label-gallery filter-tope-group size27 flex-sb-m-m-l-r-auto flex-col-c-sm p-l-15 p-r-15 m-b-60 text-center">
+        <a asp-controller="Home" asp-action="Index" class="label-gallery txt26 trans-0-4 @(ViewBag.KategoriId==null?"is-actived":"")">
+            Ürünler
+        </a>
+
+       @foreach (var item in Model)
+    {
+          <a asp-action="KategoriDetay" class="label-gallery txt26 trans-0-4 @(ViewBag.KategoriId?.ToString()==item.Id.ToString()?"is-actived":"")" asp-route-id="@item.Id" >
+            @item.KategoriAdi
+        </a>
+    }
+        
+      
+
+       
+    </div>

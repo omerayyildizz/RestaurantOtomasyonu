@@ -1,0 +1,42 @@
+﻿@model IEnumerable<RestaurantOtomasyonu.Models.Galeri>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Galeri Ekle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               RESİM
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.Resim == null)
+                    {
+                        <img src="~/Site/images/noimage.jpg" width="100px" height="100px">
+                    }
+                    else
+                    {
+                        <img src="@item.Resim" width="100" height="100">
+                    }
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="bi bi-trash"></i>SİL</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

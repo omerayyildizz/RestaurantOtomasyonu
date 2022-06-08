@@ -1,0 +1,83 @@
+﻿@model IEnumerable<RestaurantOtomasyonu.Models.Blog>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<table class="table table-bordered table-striped" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                Resim
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Onay
+            </th>
+            <th>
+                Mesaj
+            </th>
+            <th>
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.Resim == null)
+                    {
+                        <img src="~/Site/images/noimage.jpg" style=" width:100px;height:80px;" />
+                    }
+                    else
+                    {
+                        <img src="@item.Resim" style=" width:100px;height:80px;" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+                <td>
+                   @if (item.Onay)
+                        {
+                            <button class="btn btn-success btn-xs"><i class="bi bi-check-circle"></i>EVET</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger btn-xs"><i class="bi bi-x-circle"></i>EVET</button>
+
+
+                        }
+                   
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mesaj)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success"><i class="bi bi-pencil"></i>Onayla</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="bi bi-trash">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                }
+            });
+        });
+    </script>
+}

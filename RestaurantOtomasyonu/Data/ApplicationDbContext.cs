@@ -15,5 +15,12 @@ namespace RestaurantOtomasyonu.Data
         }
         public DbSet<Kategori> Kategoriler { get; set; }
         public DbSet<Menu> Menuler { get; set; }
+        public DbSet<Rezervasyon> Rezervasyonlar { get; set; }
+        public DbSet<Galeri> Galeri { get; set; }
+        public DbSet<Hakkimizda> Hakkimizda { get; set; }
+        public DbSet<Blog> Blog { get; set; }
+        public DbSet<Iletisim> Iletisim { get; set; }
+        public DbSet<İletisimInfo> İletisimInfo { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
 }

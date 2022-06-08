@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NToastNotify;
 using RestaurantOtomasyonu.Data;
+using RestaurantOtomasyonu.Email;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,10 +34,26 @@ namespace RestaurantOtomasyonu
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+            {
+                CloseButton = true,
+                PositionClass=ToastPositions.TopCenter,
+                PreventDuplicates=true,
+                Type=Enums.NotificationTypesToastr.Success
+            });
+            services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<EmailOptions>(Configuration);
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddRazorPages();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+            //AddRazorRuntimeCompilation sayfanýn sürekli olarak yeniden açýp kapatýlmasýný engeller.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
