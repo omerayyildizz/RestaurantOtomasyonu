@@ -17,7 +17,7 @@
                         Hoşgeldiniz...
                     </h2>
 
-                    <div class="wrap-btn-slide1 animated visible-false" data-appear="zoomIn">
+                    <div class="wrap-btn-slide1 animated visible-false" data-appear="zoomIn" >
                         <!-- Button1 -->
                         <a asp-controller="Home" asp-action="Menu" asp-area="Musteri" class="btn1 flex-c-m size1 txt3 trans-0-4">
                             MENULER
@@ -70,7 +70,7 @@
     </div>
 </section>
 
-<div class="section-gallery p-t-20 text-center">
+<div class="section-gallery p-t-20" style="margin-left:400px;">
   
   @await Component.InvokeAsync("KategoriListe")
 
@@ -108,7 +108,7 @@
             }
             else
             {
-                <div class="alert alert-warning text-center">
+                <div class="alert alert-warning" style="margin-left:400px;">
                     Herhangi bir ürün bulunmamaktadır.
                 </div> 
             }
